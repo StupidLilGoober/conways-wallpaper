@@ -1,34 +1,37 @@
 # Conway's Wallpaper
 
-John Conway's Game of Life on the Linux wallpaper.
+A live wallpaper implementation of John Conway's Game of Life for Linux.
 
 ![Preview](preview.gif)
 
 > [!NOTE]
-> The actual program is far smoother than the GIF would make it out to be.
+> The actual program is significantly smoother than the GIF preview.
 
 ## What it Does
 
-Conway’s Wallpaper generates raw RGB frames from a simulation of Conway's Game
-of Life, and then runs it through a video software where it can then be placed
-onto the wallpaper.
+Conway's Wallpaper generates raw RGB frames from a simulation of Conway's Game
+of Life and pipes them into video software, allowing the simulation to be
+displayed as a live wallpaper.
 
-### Why Run Through a Video?
+## Why Use Video Software?
 
-For most Linux setups, you can't directly edit the wallpaper without using
-setup-specific libraries. By running through something like `mpvpaper`, there
-is not longer a need to use such a library.
+Most Linux desktop environments do not provide a universal way to modify the
+wallpaper directly. By using software such as `mpvpaper`, Conway's Wallpaper
+avoids desktop-environment-specific APIs.
 
 ## Dependencies
 
-* MPV - The video software that `mpvpaper` uses to render to the wallpaper.
-* `mpvpaper` - Software that renders videos onto the wallpaper. (Wayland)
-* `xwinwrap` - Software that renders videos onto the wallpaper. (X11)
-* SDL3 - Used for timing primarily.
+### Wayland
+* MPV
+* mpvpaper
+* SDL3
 
----
+### X11
+* MPV
+* xwinwrap
+* SDL3
 
-## Known Issues
+## Limitations
 
-* Completely covers desktop icons
-* Is not full 16:9 ratio
+* Desktop icons may be hidden while the wallpaper is running.
+* Currently optimized for 16:9 displays.
