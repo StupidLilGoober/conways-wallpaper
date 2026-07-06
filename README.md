@@ -42,4 +42,4 @@ cmake --build build
 ## Limitations
 
 * Desktop icons may be hidden while the wallpaper is running.
-* Currently optimized for 16:9 displays.
+* Currently only goes to a 4:3 aspect ratio.
