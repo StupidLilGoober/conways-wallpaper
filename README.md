@@ -19,6 +19,14 @@ Most Linux desktop environments do not provide a universal way to modify the
 wallpaper directly. By using software such as `mpvpaper`, Conway's Wallpaper
 avoids desktop-environment-specific APIs.
 
+## Building
+
+```bash
+git clone https://github.com/stupidlilgoober/conways-wallpaper.git
+cmake -B build -S .
+cmake --build build
+```
+
 ## Dependencies
 
 ### Wayland
