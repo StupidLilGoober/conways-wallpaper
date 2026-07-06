@@ -1,40 +1,51 @@
 #include <SDL3/SDL.h>
+#include <stdio.h>
 #include <inttypes.h>
 
 #include "grid.h"
 
 int main() {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        SDL_Log("Could not initialize SDL: %s", SDL_GetError());
-        return 1;
-    }
-
-    SDL_Window *window = SDL_CreateWindow(
-        "Conway's Wallpaper",
-        640,
-        480,
-        0
-    );
-
-    if (!window) {
-        SDL_Log("Could not create window: %s", SDL_GetError());
-        SDL_Quit();
-        return 1;
-    }
-
-    uint8_t grid[COLS][ROWS] = {}; // initialize grid
-                                   // 0 = dead
-                                   // 1 = alive
+    uint8_t grid[COLS][ROWS] = { 0 }; // initialize grid
+                                      // 0 = dead
+                                      // 1 = alive
 
     initialize(grid);
 
-    SDL_Renderer* renderer = SDL_GetRenderer(window);
+    bool running = true;
 
-    while (true) {
+    uint8_t framebuffer[WIDTH * HEIGHT * 3];
 
+    int frames = 0;
+
+    while (running) {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                running = false;
+            }
+        }
+
+        simulation(grid, framebuffer);
+
+        fwrite(
+            framebuffer,
+            1,
+            sizeof(framebuffer),
+            stdout
+        );
+
+        fflush(stdout);
+
+        frames++;
+
+        if (frames >= RESET_FRAMES) {
+            initialize(grid);
+            frames = 0;
+        }
+
+        SDL_Delay(1000 / FPS);
     }
 
-    SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
 }
