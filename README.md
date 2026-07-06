@@ -2,6 +2,11 @@
 
 John Conway's Game of Life on the Linux wallpaper.
 
+![Preview](preview.gif)
+
+> [!NOTE]
+> The actual program is far smoother than the GIF would make it out to be.
+
 ## What it Does
 
 Conway’s Wallpaper generates raw RGB frames from a simulation of Conway's Game
